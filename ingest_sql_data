@@ -1,0 +1,5 @@
+def ingest_sql_data(self):
+    self.engine = create_db_engine(self.db_path)
+    self.df = query_data(self.engine, self.sql_query)
+    self.logger.info("Successfully loaded data.")
+    return self.df
