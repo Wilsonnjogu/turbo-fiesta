@@ -1,45 +1,5 @@
-import pandas as pd
-import sqlite3
-
-
-def read_csv_data(file_path):
-    """
-    Load data from a CSV file.
-
-    Parameters:
-    file_path (str): Path to CSV file.
-
-    Returns:
-    DataFrame: Loaded data.
-    """
-    return pd.read_csv(file_path)
-
-
-def read_excel_data(file_path):
-    """
-    Load data from an Excel file.
-
-    Parameters:
-    file_path (str): Path to Excel file.
-
-    Returns:
-    DataFrame: Loaded data.
-    """
-    return pd.read_excel(file_path)
-
-
-def ingest_sql_data(db_path, query):
-    """
-    Load data from a SQL database.
-
-    Parameters:
-    db_path (str): Database file path.
-    query (str): SQL query string.
-
-    Returns:
-    DataFrame: Query results.
-    """
-    conn = sqlite3.connect(db_path)
-    df = pd.read_sql_query(query, conn)
-    conn.close()
-    return df
+def ingest_sql_data(self):
+    self.engine = create_db_engine(self.db_path)
+    self.df = query_data(self.engine, self.sql_query)
+    self.logger.info("Successfully loaded data.")
+    return self.df
